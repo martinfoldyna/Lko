@@ -1,6 +1,6 @@
 export const Config = {
   microsoft: {
-    appId: '74a68785-0491-4ba1-8edf-24d1f91db681', // Klíč pro Microsoft přihlášení
+    appId: '3363a6fa-a0eb-4ba4-a1d7-c8c6d0f22aa1', // Klíč pro Microsoft přihlášení
     scopes: ["user.read"]
   },
   google: {
