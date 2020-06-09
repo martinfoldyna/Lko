@@ -8,8 +8,8 @@
       </nb-card-header>
 
       <nb-card-footer>
-        <div class="d-flex justify-content-between">
-          <h2>{{post.title}}</h2>
+        <div class="d-flex justify-content-between flex-wrap">
+          <h3>{{post.title}}</h3>
           <div class="icons d-flex align-items-center">
             <nb-icon icon="edit-outline" pack="eva" status="warning" class="update-icon " (click)="editArticle(post)"></nb-icon>
             <nb-icon icon="trash-2-outline" pack="eva" status="danger" class="remove-icon " (click)="deleteArticle(post._id)" style="cursor: pointer"></nb-icon>

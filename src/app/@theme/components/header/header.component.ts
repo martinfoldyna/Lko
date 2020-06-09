@@ -61,13 +61,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
       console.log(err);
     });
 
-    // const { xl } = this.breakpointService.getBreakpointsMap();
-    // this.themeService.onMediaQueryChange()
-    //   .pipe(
-    //     map(([, currentBreakpoint]) => currentBreakpoint.width < xl),
-    //     takeUntil(this.destroy$),
-    //   )
-    //   .subscribe((isLessThanXl: boolean) => this.userPictureOnly = isLessThanXl);
+    const { xl } = this.breakpointService.getBreakpointsMap();
+    this.themeService.onMediaQueryChange()
+      .pipe(
+        map(([, currentBreakpoint]) => currentBreakpoint.width < xl),
+        takeUntil(this.destroy$),
+      )
+      .subscribe((isLessThanXl: boolean) => this.userPictureOnly = isLessThanXl);
 
     // this.themeService.onThemeChange()
     //   .pipe(

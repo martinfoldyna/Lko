@@ -48,7 +48,6 @@ export class LoginComponent implements OnInit {
   }
 
   private storeUser(data, loggedInBy, provider) {
-    let token = loggedInBy === "social" ? data["idToken"] : data["token"];
     let user = loggedInBy === "social" ? data : data["user"];
 
     sessionStorage.setItem('auth_token', provider + ' ' + data["token"]);
@@ -63,7 +62,8 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/pages/dashboard');
         this.user = user;
       }).catch(err => {
-        this.toastr.warning(err.error.code.message, 'Upozornění!');
+        // this.toastr.warning(err.error.code.message, 'Upozornění!');
+        this.toastr.warning('Během přihlášení došlo k chybě. Zkuste se přihlásit znovu.', 'Upozornění!');
       })
     }
 

@@ -8,6 +8,7 @@ import {environment} from "../../../../environments/environment";
 import {CompressedPhoto} from "../../../@core/data/photo";
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
 import {NbToastrService} from "@nebular/theme";
+import {UpdateImageComponent} from "../update-image/update-image.component";
 
 
 
@@ -25,6 +26,7 @@ export class ImageCardComponent implements OnInit {
   @Input() groupedImage: [Image];
   @Input() groupKey: string;
   @Input() image: Image;
+  @Input() imageTypes: Array<string>;
 
   @Input() loadingImages: boolean;
 
@@ -85,6 +87,13 @@ export class ImageCardComponent implements OnInit {
         image: this.groupedImage[imageIndex],
         allImages: this.groupedImage,
         fromSlider: true
+      }})
+  }
+
+  updateImage(imageID) {
+    this.dialogService.open(UpdateImageComponent, {context: {
+        image: this.image,
+        imageTypes: this.imageTypes
       }})
   }
 

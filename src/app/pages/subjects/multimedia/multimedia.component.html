@@ -29,7 +29,7 @@
       </nb-card>
     </div>
     <div class="own-scroll col-md-12 col-lg-4 col-xxxl-4 ng-star-inserted" *ngFor="let photo of allImages">
-      <ngx-image-card (loadImages)="loadImages()" [image]="photo" [subject]="subject" (loadNewImages)="receivedImage($event)"></ngx-image-card>
+      <ngx-image-card (loadImages)="loadImages()" [image]="photo" [imageTypes]="uniqueImageTypes" [subject]="subject" (loadNewImages)="receivedImage($event)"></ngx-image-card>
     </div>
   </div>
 <!--  <ngx-image-card [subject]="subject"></ngx-image-card>-->

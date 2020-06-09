@@ -21,6 +21,7 @@ export class MultimediaComponent implements OnInit {
   video: Video = {};
   allVideos: [Video];
   allImages: [Image];
+  uniqueImageTypes: Array<string>;
 
 
   public article;
@@ -31,7 +32,7 @@ export class MultimediaComponent implements OnInit {
     private postService: PostService,
     private toastr: NbToastrService
   ) {
-
+    this.uniqueImageTypes = new Array<string>();
   }
 
   ngOnInit() {
@@ -64,6 +65,10 @@ export class MultimediaComponent implements OnInit {
     }, err => {
       this.toastr.danger(err, 'Během načítání obrázků došlo k chybě');
     })
+  }
+
+  getUniqueImageTypes() {
+    this.uniqueImageTypes = [...new Set(this.allImages.map(item => item.type))].sort();
   }
 
   parentFunc() {

@@ -41,7 +41,6 @@ export class WindowEditComponent implements OnInit{
   onKeyUp(textarea?) {
     this.articleWasUpdated = (this.newArticle.title !== this.article.title || textarea.value !== this.article.body);
     if(textarea) this.newArticle.body = textarea.value;
-
   }
 
   edit() {

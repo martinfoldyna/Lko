@@ -1,31 +1,8 @@
-<!--<div class="infinite-cards row">-->
-<!--  <p *ngIf="!allImages">Žádné fotky nebyly nalezeny</p>-->
-<!--  <div class="own-scroll col-md-12 col-lg-4 col-xxxl-4" *ngFor="let image of allImages">-->
-<!--    <nb-card  *ngIf="imagesLoaded | async" [nbSpinner]="deletingImage" class="image-card">-->
-<!--      <nb-card-header class="image-header">-->
-<!--        {{image.filename}}-->
-<!--        <div class="header-icons">-->
-<!--          <nb-icon icon="trash-2-outline" pack="eva" status="danger" class="header-icon " (click)="deleteImage(image._id)" style="cursor: pointer"></nb-icon>-->
-<!--        </div>-->
-<!--      </nb-card-header>-->
-
-<!--      <nb-card-body (mouseenter)="showOverlay = !showOverlay" (mouseleave)="showOverlay = !showOverlay" *ngIf="subject!=='STR'">-->
-<!--        <img src="data:image/jpg;base64,{{image.base64}}" alt="" (click)="openImage(image)" [style.transform]="photosService.rotateImage(image.orientation)">-->
-<!--        <div class="overlay" *ngIf="showOverlay" (click)="openImage(image)">-->
-<!--          <nb-icon icon="external-link-outline" pack="eva"></nb-icon>-->
-<!--        </div>-->
-<!--      </nb-card-body>-->
-
-<!--      <nb-card-footer *ngIf="image.createdBy">-->
-<!--        <p class="label">Vytvořeno: {{image.createdBy.name}} - {{image.createdAt | amLocal | amDateFormat: "DD.MM.YYYY v HH:MM"}} </p>-->
-<!--      </nb-card-footer>-->
-<!--    </nb-card>-->
-<!--  </div>-->
-<!--</div>-->
-    <nb-card [nbSpinner]="deletingImage || loadingImages" class="image-card" *ngIf="image">
+ <nb-card [nbSpinner]="deletingImage || loadingImages" class="image-card" *ngIf="!groupedImage">
       <nb-card-header class="image-header">
         {{image.filename}}
         <div class="header-icons">
+          <nb-icon icon="edit-outline" status="warning" class="header-icon" (click)="updateImage(image._id)"></nb-icon>
           <nb-icon icon="trash-2-outline" pack="eva" status="danger" class="header-icon " (click)="deleteImage(image._id)" style="cursor: pointer"></nb-icon>
         </div>
       </nb-card-header>

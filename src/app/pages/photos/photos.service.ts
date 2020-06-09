@@ -43,6 +43,10 @@ export class PhotosService {
     }));
   }
 
+  edit(image: Image) {
+    return this.http.post(`${Config.apiUrl}photo/edit/${image._id}`, {filename: image.filename, description: image.description, type: image.type})
+  }
+
   loadImages(subject): Observable<MultipleImageResponse> {
     return this.http.get<MultipleImageResponse>(`${Config.apiUrl}photo/retrieve/${subject}/thumbs`);
   }

@@ -11,7 +11,8 @@ import {Config} from "../../../conf";
 @Injectable({
   providedIn: 'root'
 })
-export class LocalAuthService {
+export class
+LocalAuthService {
 
   constructor(
     private http: HttpClient,
@@ -38,12 +39,14 @@ export class LocalAuthService {
 
   logout() {
     if (sessionStorage.getItem('user') && sessionStorage.getItem('auth_token')) {
-      sessionStorage.removeItem('user');
-      sessionStorage.removeItem('auth_token');
+      sessionStorage.clear();
+      localStorage.clear();
       window.location.reload();
     }
 
     if(sessionStorage.getItem('loggedInBy') === 'social') {
+      sessionStorage.clear();
+      localStorage.clear();
       this.socialAuth.signOut();
     }
 
@@ -51,9 +54,6 @@ export class LocalAuthService {
   }
 
   googleAuth() {
-
-    // return new Promise((resolve, reject) => {
-
       return new Promise((resolve, reject) => {
         this.socialAuth.authState.subscribe(user => {
           resolve(user);
@@ -63,7 +63,6 @@ export class LocalAuthService {
 
         })
       })
-      // resolve(true)
   }
 
   googleOnLoginState() {

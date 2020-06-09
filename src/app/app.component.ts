@@ -16,13 +16,11 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 export class AppComponent implements OnInit {
 
   constructor(
-    private analytics: AnalyticsService,
     private authService: AuthService,
   ) {
   }
 
   ngOnInit(): void {
-    this.analytics.trackPageViews();
   }
 
 

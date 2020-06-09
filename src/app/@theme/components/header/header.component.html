@@ -3,15 +3,16 @@
     <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">
       <nb-icon icon="menu-2-outline"></nb-icon>
     </a>
-    <a class="logo" href="/pages/dashboard">Lko</a>
+    <a class="logo" href="/Lko/pages/dashboard">Lko</a>
   </div>
 </div>
 
 <div class="header-container">
   <nb-actions size="small">
 
-    <nb-action class="user-action" >
+    <nb-action class="user-action">
       <nb-user [name]="user?.name"
+               [onlyPicture]="userPictureOnly"
                [picture]="user?.photoUrl">
       </nb-user>
     </nb-action>

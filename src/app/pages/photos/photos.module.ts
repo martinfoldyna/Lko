@@ -14,8 +14,8 @@ import {
   NbIconModule,
   NbUserModule,
   NbPopoverModule,
-  NbSelectModule
-
+  NbSelectModule,
+  NbRadioModule,
 } from "@nebular/theme";
 import { OverviewComponent } from './overview/overview.component';
 import {FormsModule} from "@angular/forms";
@@ -28,10 +28,11 @@ import { LazyloadDirective } from './image-card/lazyload.directive';
 import {PhotosService} from "./photos.service";
 import {NgxGalleryModule} from "ngx-gallery"
 import { NgImageSliderModule } from 'ng-image-slider';
+import { UpdateImageComponent } from './update-image/update-image.component';
 
 
 @NgModule({
-  declarations: [PhotosComponent, AddPhotoComponent, OverviewComponent, ImageCardComponent, LightboxComponent, LazyloadDirective],
+  declarations: [PhotosComponent, AddPhotoComponent, OverviewComponent, ImageCardComponent, LightboxComponent, LazyloadDirective, UpdateImageComponent],
   imports: [
     CommonModule,
     NgImageSliderModule,
@@ -51,7 +52,8 @@ import { NgImageSliderModule } from 'ng-image-slider';
     MomentModule,
     NbPopoverModule,
     NgxGalleryModule,
-    NbSelectModule
+    NbSelectModule,
+    NbRadioModule
   ],
   exports: [
     ImageCardComponent,
@@ -59,7 +61,8 @@ import { NgImageSliderModule } from 'ng-image-slider';
   ],
   providers: [NgxImageCompressService, PhotosService],
   entryComponents: [
-    LightboxComponent
+    LightboxComponent,
+    UpdateImageComponent
   ]
 })
 export class PhotosModule { }

@@ -14,7 +14,6 @@ import {DomSanitizer} from "@angular/platform-browser";
                   <nb-card-body>
                       <ngx-add-photo></ngx-add-photo>
                   </nb-card-body>
-                  
               </nb-card>
           </div>
       </div>

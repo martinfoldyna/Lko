@@ -30,7 +30,7 @@ import {AdminGuard, AuthGuard} from "../@core/guards/auth.guard";
         NbInputModule,
         NbButtonModule,
         NbLayoutModule,
-        FormsModule,
+      FormsModule,
         NbIconModule,
         NgxGalleryModule,
         MsalModule.forRoot({

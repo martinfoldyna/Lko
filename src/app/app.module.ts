@@ -24,6 +24,7 @@ import {
 } from '@nebular/theme';
 import {MsalModule} from "@azure/msal-angular";
 import {AuthService, AuthServiceConfig, GoogleLoginProvider} from "angularx-social-login";
+import { NbSecurityModule } from '@nebular/security';
 import {TokenInterceptor} from "./@core/utils/HttpInterceptor";
 import {AdminGuard} from "./@core/guards/auth.guard";
 import {Config} from "../conf";
@@ -46,6 +47,7 @@ export function socialConfigs() {
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    NbSecurityModule.forRoot(),
     ThemeModule.forRoot(),
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),

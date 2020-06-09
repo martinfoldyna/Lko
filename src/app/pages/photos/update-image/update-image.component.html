@@ -1,0 +1,52 @@
+<nb-card class="dialog-card">
+  <nb-card-header>
+    Upravit obrázek
+  </nb-card-header>
+  <nb-card-body>
+    <form #updateForm="ngForm">
+      <div class="form-group">
+        <label class="label" for="edit-title">Název:</label>
+        <input nbInput
+               fullWidth
+               ngModel
+               name="edit-title"
+               id="edit-title"
+               placeholder="Název obrázku"
+               [(ngModel)] = "newImage.filename"
+               autofocus
+               autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label class="label" for="edit-description">Popis obrázku:</label>
+        <input nbInput
+               fullWidth
+               ngModel
+               name="edit-description"
+               id="edit-description"
+               placeholder="Popis obrázku"
+               [(ngModel)] = "newImage.description"
+               autocomplete="off">
+      </div>
+<!--      <div class="form-group">-->
+<!--        <label class="label">Typ obrázku:-->
+<!--        </label>-->
+<!--          <nb-radio-group [(ngModel)]="newImage.type" name="imageType">-->
+<!--            <nb-radio value="" [checked]="!image.type">Neurčeno</nb-radio>-->
+<!--            <nb-radio *ngFor="let type of imageTypes" [value]="whiteSpaceToUnderscore(type).toLowerCase()">{{type}}</nb-radio>-->
+<!--          </nb-radio-group>-->
+<!--        <button nbButton size="tiny" outline><nb-icon icon="plus-outline"></nb-icon> Přidat typ</button>-->
+<!--          <input nbInput fullWidth type="text" placeholder="Zadejte typ obrázku" *ngIf="newImageType">-->
+<!--      </div>-->
+    </form>
+  </nb-card-body>
+  <nb-card-footer>
+    <div class="d-flex justify-content-around">
+      <button class="uploadButton" nbButton (click)="edit()" [disabled]="!updateForm.valid" fullWidth>
+        Upravit
+      </button>
+      <button (click)="dialogRef.close()" nbButton status="danger" [disabled]="!updateForm.valid" fullWidth>
+        Zavřít
+      </button>
+    </div>
+  </nb-card-footer>
+</nb-card>
