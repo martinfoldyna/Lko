@@ -1,0 +1,33 @@
+
+  <nb-card [nbSpinner]="updatingUser" nbSpinnerStatus="primary" nbSpinnerMessage="Upravuji data..">
+    <nb-card-header>Upravit uživatele</nb-card-header>
+    <nb-card-body>
+      <form>
+        <div class="form-group">
+          <label for="edit-name" class="label">Jméno</label>
+          <input type="text" nbInput id="edit-name" name="edit-name" [(ngModel)]="newUser.name" fullWidth (keyup)="onKeyUp()">
+        </div>
+        <div class="form-group">
+          <label for="edit-email" class="label">E-mail</label>
+          <input type="text" nbInput id="edit-email" name="edit-email" [(ngModel)]="newUser.email" fullWidth (keyup)="onKeyUp()">
+        </div>
+        <div class="form-group">
+          <label for="edit-email" class="label">Role</label>
+          <nb-select [(selected)]="newUser.role" fullWidth (selectedChange)="onKeyUp()">
+            <nb-option value="teacher">Teacher</nb-option>
+            <nb-option value="admin">Admin</nb-option>
+          </nb-select>
+        </div>
+      </form>
+    </nb-card-body>
+    <nb-card-footer>
+      <div class="row">
+        <div class="col-6 col-sm-12 m-1">
+          <button nbButton (click)="edit()" status="success" [disabled]="!userWasUpdated" fullWidth>Uložit</button>
+        </div>
+        <div class="col-6 col-sm-12 m-1">
+          <button nbButton (click)="dialogRef.close()" status="danger" fullWidth>Zavřít</button>
+        </div>
+      </div>
+    </nb-card-footer>
+  </nb-card>

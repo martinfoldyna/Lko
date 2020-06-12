@@ -7,21 +7,22 @@ import {NbToastrService} from "@nebular/theme";
 @Component({
   selector: 'ngx-user',
   template: `
-    <ngx-user-authorise></ngx-user-authorise>
-    <ngx-user-overview></ngx-user-overview>
+    <ngx-user-authorise (refreshUsers)="overview.loadUsers();" #authorise></ngx-user-authorise>
+    <ngx-user-overview (refreshUsers)="authorise.loadUsers()" #overview></ngx-user-overview>
   `,
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
 
   constructor(
-    private userService: UserService,
-    private toastr: NbToastrService,
   ) {
 
   }
 
   ngOnInit() {
+  }
+
+  loadUsers() {
 
   }
 

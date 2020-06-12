@@ -76,7 +76,7 @@ export function socialConfigs() {
       useClass: TokenInterceptor,
       multi: true
     }
-  ]
+  ],
 
 
 })

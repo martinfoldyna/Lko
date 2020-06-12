@@ -3,6 +3,7 @@
     Přehled autorizovaných uživatelů
   </nb-card-header>
   <nb-card-body>
-    <ng2-smart-table [settings]="settings" [source]="allUsers" (delete)="onDelete($event)" (editConfirm)="onSaveConfirm($event)"></ng2-smart-table>
+    <ng2-smart-table [settings]="settings" [source]="allUsers" (edit)="onEdit($event)" (delete)="onDelete($event)"></ng2-smart-table>
   </nb-card-body>
 </nb-card>
+

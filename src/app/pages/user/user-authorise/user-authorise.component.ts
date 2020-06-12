@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {UserService} from "../user.service";
 import {AuthoriseUser} from "../../../@core/data/users";
 import {LocalAuthService} from "../../auth/auth.service";
+import {NbToastrService} from "@nebular/theme";
 
 @Component({
   selector: 'ngx-user-authorise',
@@ -9,6 +10,7 @@ import {LocalAuthService} from "../../auth/auth.service";
   styleUrls: ['./user-authorise.component.scss']
 })
 export class UserAuthoriseComponent implements OnInit {
+  @Output("refreshUsers") refreshUsers: EventEmitter<any> = new EventEmitter();
 
   settings = {
     actions: {
@@ -40,6 +42,7 @@ export class UserAuthoriseComponent implements OnInit {
   constructor(
     private userService: UserService,
     private localAuthService: LocalAuthService,
+    private toastr: NbToastrService
   ) { }
 
   ngOnInit() {
@@ -62,15 +65,15 @@ export class UserAuthoriseComponent implements OnInit {
     this.localAuthService.authorise(event.data._id).subscribe(response => {
       if(response) {
         this.loadUsers();
-        window.location.reload()
+        this.refreshUsers.emit();
+        this.toastr.success('', 'Uživatel byl autorizován.');
       }
     })
   }
 
   onDelete(event) {
     this.userService.remove(event.data._id).subscribe(user => {
-      this.loadUsers()
-      window.location.reload()
+      this.loadUsers();
     })
   }
 

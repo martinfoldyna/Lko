@@ -6,16 +6,18 @@ import {UserComponent} from "./user.component";
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import {NbCardModule} from "@nebular/theme"
 import {UserOverviewComponent} from "./user-overview/user-overview.component";
+import {UserEditComponent} from "./user-edit/user-edit.component";
 
 
 
 @NgModule({
-    declarations: [UserAuthoriseComponent, UserComponent, UserOverviewComponent],
+
   imports: [
     CommonModule,
     UserRoutingModule,
     Ng2SmartTableModule,
-    NbCardModule
-  ]
+    NbCardModule,
+  ],
+  declarations: [UserAuthoriseComponent, UserComponent, UserOverviewComponent],
 })
 export class UserModule { }

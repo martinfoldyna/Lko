@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import {NbCardModule, NbInputModule, NbListModule, NbMenuModule, NbButtonModule, NbLayoutModule, NbIconModule} from '@nebular/theme';
+import {NbCardModule, NbInputModule, NbListModule, NbMenuModule, NbButtonModule, NbLayoutModule, NbIconModule, NbSelectModule, NbToastrModule, NbSpinnerModule} from '@nebular/theme';
 import {NgxGalleryModule} from "ngx-gallery";
 import {MsalModule} from '@azure/msal-angular';
 import { ThemeModule } from '../@theme/theme.module';
@@ -15,6 +15,7 @@ import {ArticlesModule} from "./articles/articles.module";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {OAuthSettings} from "../@core/utils/oauth";
 import {AdminGuard, AuthGuard} from "../@core/guards/auth.guard";
+import {UserEditComponent} from "./user/user-edit/user-edit.component";
 
 @NgModule({
     imports: [
@@ -26,12 +27,15 @@ import {AdminGuard, AuthGuard} from "../@core/guards/auth.guard";
         PhotosModule,
         ArticlesModule,
         NbCardModule,
+        NbSelectModule,
         NbListModule,
         NbInputModule,
         NbButtonModule,
         NbLayoutModule,
       FormsModule,
+        NbToastrModule,
         NbIconModule,
+        NbSpinnerModule,
         NgxGalleryModule,
         MsalModule.forRoot({
             clientID: OAuthSettings.appId,
@@ -40,7 +44,11 @@ import {AdminGuard, AuthGuard} from "../@core/guards/auth.guard";
     declarations: [
         PagesComponent,
         DashboardComponent,
+        UserEditComponent
     ],
+    entryComponents: [
+      UserEditComponent
+    ]
 
 
 })

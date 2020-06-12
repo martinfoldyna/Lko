@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import {NbToastrService} from "@nebular/theme";
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {NbToastrService, NbDialogService} from "@nebular/theme";
 import {UserService} from "../user.service";
 import {AuthoriseUser} from "../../../@core/data/users";
 import {AuthService} from "../../../@core/utils/auth.service";
 import {LocalAuthService} from "../../auth/auth.service";
+import {UserEditComponent} from "../user-edit/user-edit.component";
 
 @Component({
   selector: 'ngx-user-overview',
@@ -11,55 +12,82 @@ import {LocalAuthService} from "../../auth/auth.service";
   styleUrls: ['./user-overview.component.scss']
 })
 export class UserOverviewComponent implements OnInit {
+  @Output("refreshUsers") refreshUsers: EventEmitter<any> = new EventEmitter();
+
+  // settings = {
+  //   actions: {
+  //     add: false
+  //   },
+  //   edit: {
+  //     editButtonContent: '<i class="nb-edit"></i>',
+  //     saveButtonContent: '<i class="nb-checkmark"></i>',
+  //     cancelButtonContent: '<i class="nb-close"></i>',
+  //   },
+  //   delete: {
+  //     deleteButtonContent: '<i class="nb-fold"></i>',
+  //     confirmDelete: true,
+  //   },
+  //   columns: {
+  //     name: {
+  //       title: 'Jméno',
+  //       type: 'string',
+  //       editable: false,
+  //     },
+  //     email: {
+  //       title: 'E-mail',
+  //       type: 'string',
+  //       editable: false,
+  //     },
+  //     role: {
+  //       title: 'Role',
+  //       editor: {
+  //         type: 'list',
+  //         config: {
+  //           selectText: 'Vyberte možnost',
+  //           list: [
+  //             {value: 'teacher', title:'teacher'},
+  //             {value: 'admin', title:'admin'},
+  //           ],
+  //         },
+  //       },
+  //       filter: {
+  //         type: 'list',
+  //         config: {
+  //           selectText: 'Vyberte roli',
+  //           list: [
+  //             {value: 'teacher', title:'teacher'},
+  //             {value: 'admin', title:'admin'},
+  //           ],
+  //         },
+  //       },
+  //     }
+  //   },
+  // };
+
   settings = {
     actions: {
       add: false,
-      edit: true,
-      delete: true,
     },
     edit: {
       editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmSave: true,
     },
     delete: {
-      deleteButtonContent: '<i class="nb-fold"></i>',
+      deleteButtonContent: '<i class="nb-close"></i>',
       confirmDelete: true,
     },
+    mode: 'external',
     columns: {
       name: {
         title: 'Jméno',
         type: 'string',
-        editable: false,
       },
       email: {
         title: 'E-mail',
         type: 'string',
-        editable: false,
       },
       role: {
         title: 'Role',
-        editor: {
-          type: 'list',
-          config: {
-            selectText: 'Vyberte možnost',
-            list: [
-              {value: 'teacher', title:'teacher'},
-              {value: 'admin', title:'admin'},
-            ],
-          },
-        },
-        filter: {
-          type: 'list',
-          config: {
-            selectText: 'Vyberte roli',
-            list: [
-              {value: 'teacher', title:'teacher'},
-              {value: 'admin', title:'admin'},
-            ],
-          },
-        },
+        type: 'role'
       }
     },
   };
@@ -69,7 +97,8 @@ export class UserOverviewComponent implements OnInit {
   constructor(
     private userService: UserService,
     private authService: LocalAuthService,
-    private toastr: NbToastrService
+    private toastr: NbToastrService,
+    private dialogService: NbDialogService
   ) { }
 
   ngOnInit() {
@@ -94,23 +123,17 @@ export class UserOverviewComponent implements OnInit {
     this.authService.deAuthorise(event.data._id).subscribe(response => {
       if(response) {
         console.log(response);
-        window.location.reload()
+        this.refreshUsers.emit();
         this.loadUsers();
+        this.toastr.success('', 'Uživatel byl deautorizován.')
       }
     })
   }
 
-  onSaveConfirm(event) {
-    let user = event.newData;
-    this.userService.update(user._id, user).subscribe(response => {
-      if(response) {
-        this.toastr.success('', response.code.message);
-        window.location.reload();
-      }
-    }, err => {
-      console.log(err);
-      this.toastr.warning('', err.error.code.message);
-    })
+  onEdit(event) {
+    this.dialogService.open(UserEditComponent, {context: {
+        user: event.data,
+      }}).onClose.subscribe(data => {this.loadUsers()})
   }
 
 }
