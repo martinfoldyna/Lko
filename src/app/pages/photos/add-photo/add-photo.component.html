@@ -1,7 +1,7 @@
         <form #form>
 
           <div class="form-group" *ngIf="subject==='STR'">
-            <label class="label" for="input-title">Název výkresu:</label>
+            <label class="label" for="input-title">Název výkresu</label>
             <input nbInput
                    fullWidth
                    ngModel
@@ -14,9 +14,11 @@
                    autocomplete="off">
           </div>
           <div class="form-group">
-            <label class="label" for="input-files" *ngIf="subject!=='STR'">Vyberte obrázky, které chcete nahrát:</label>
-            <label class="label" for="input-files" *ngIf="subject==='STR'">Vyberte obrázky, které chcete nahrát (max 3x):</label>
+            <label class="label" for="input-files" *ngIf="subject!=='STR'">Vyberte obrázky, které chcete nahrát</label>
+            <label class="label" for="input-files" *ngIf="subject==='STR'">Vyberte obrázky, které chcete nahrát (max 3x)</label>
             <input type="file"
+                   class="d-block"
+                   #fileInput
                    nbInput
                    id="input-files"
                    name="files"
@@ -25,7 +27,8 @@
                    (change)="filesSelected($event); compressingImages = true">
           </div>
           <div class="form-group">
-            <nb-select placeholder="Vyberte ročník" [(selected)]="classYear">
+            <label class="label">Ročník</label>
+            <nb-select placeholder="Vyberte ročník" id="classYear" [(selected)]="classYear" class="d-block">
               <nb-option value="0">1. ročník</nb-option>
               <nb-option value="1">2. ročník</nb-option>
               <nb-option value="2">3. ročník</nb-option>
@@ -33,7 +36,7 @@
             </nb-select>
           </div>
 
-          <button class="uploadButton" nbButton fullWidth status="success" [disabled]="disableSubmit()" (click)="upload(form)" [nbSpinner]="compressingImages">
+          <button class="uploadButton" nbButton fullWidth status="success" [disabled]="disableSubmit()" (click)="upload(form); form.reset(); classYear=''; fileInput.value = '';" [nbSpinner]="compressingImages">
             Nahrát
           </button>
 
@@ -42,8 +45,7 @@
             <div class="col-md-4" *ngFor="let image of thumbnailFiles; let i = index" style="height: 300px;  padding: 0;">
               <div class="content-wrapper" style="height: 100%; padding: 10px;">
                 <img [src]="image.src" alt="thumbnail image" [style.transform]="photosService.rotateImage(image.orientation)" style="object-fit: cover; display: block; margin: 0 auto; height: 80%; border-radius: 0.25rem; max-width: 100%" >
-
-                <button nbButton style="width: 80%; display: block; margin: 10px auto;" status="danger" (click)="removeImage(i)">odebrat</button>
+                  <button nbButton class="image-action" status="danger" (click)="removeImage(i)">odebrat</button>
               </div>
             </div>
 

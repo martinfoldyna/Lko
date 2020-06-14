@@ -17,7 +17,8 @@ import {
   NbInputModule,
   NbButtonModule,
   NbCheckboxModule,
-  NbIconModule
+  NbIconModule,
+  NbDialogModule
 } from "@nebular/theme";
 import {ArticlesModule} from "../articles/articles.module";
 import {PhotosModule} from "../photos/photos.module";
@@ -25,10 +26,11 @@ import {PagesModule} from "../pages.module";
 import {ExtraComponentsModule} from "../extra-components/extra-components.module";
 import { UrlCardComponent } from './web/url-card/url-card.component';
 import {MomentModule} from "ngx-moment";
+import {DeleteConfirmationComponent} from "./delete-confirmation/delete-confirmation.component";
 
 
 @NgModule({
-  declarations: [SubjectsComponent, WebComponent, MultimediaComponent, DrawingsComponent, UrlCardComponent],
+  declarations: [SubjectsComponent, WebComponent, MultimediaComponent, DrawingsComponent, UrlCardComponent, DeleteConfirmationComponent],
   imports: [
     CommonModule,
     SubjectsRoutingModule,
@@ -41,13 +43,15 @@ import {MomentModule} from "ngx-moment";
     NbActionsModule,
     NbButtonModule,
     NbCheckboxModule,
+    NbDialogModule,
     ArticlesModule,
     PhotosModule,
     PagesModule,
     ExtraComponentsModule,
     NbIconModule,
     MomentModule,
-    NgxGalleryModule
-  ]
+    NgxGalleryModule,
+  ],
+  entryComponents: [DeleteConfirmationComponent]
 })
 export class SubjectsModule { }

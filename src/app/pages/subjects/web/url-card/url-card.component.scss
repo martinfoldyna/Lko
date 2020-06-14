@@ -1,9 +1,13 @@
-img {
-  max-width: 100%;
+.url-card img {
   z-index: 100;
   transform: scale(1.1, 1.1);
   transition: all .5s;
   filter: grayscale(100%);
+  width: 100%;
+  height: 35vh;
+  object-fit: cover;
+  cursor: pointer;
+
 }
 
 a:hover img {
@@ -44,17 +48,17 @@ nb-icon.open {
 }
 
 
-nb-card-header {
+.url-card nb-card-header {
   padding: 0;
   overflow: hidden;
   position: relative;
 }
 
-nb-card {
+nb-card.url-card {
   transition: box-shadow, transform .5s;
 }
 
-nb-card:hover {
+nb-card.url-card:hover {
     box-shadow: 0 14px 25px rgba(0,0,0,.16);
     transform: scale(1.01, 1.01);
 }

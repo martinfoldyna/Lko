@@ -9,6 +9,7 @@ import {CompressedPhoto} from "../../../@core/data/photo";
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
 import {NbToastrService} from "@nebular/theme";
 import {UpdateImageComponent} from "../update-image/update-image.component";
+import {DeleteConfirmationComponent} from "../../subjects/delete-confirmation/delete-confirmation.component";
 
 
 
@@ -32,6 +33,7 @@ export class ImageCardComponent implements OnInit {
 
   showOverlay: boolean = false;
   deletingImage = false;
+  deletingGroup = false;
 
   galleryOptions: Array<NgxGalleryOptions>;
 
@@ -54,24 +56,34 @@ export class ImageCardComponent implements OnInit {
     ];
   }
 
-  deleteImage(imageId) {
-    this.deletingImage = true;
-    this.generalService.delete(environment.models.photo, imageId).subscribe(data => {
-      this.loadImages.emit();
-      this.toastr.success('', data.code.message)
-      this.deletingImage = false;
-
+  deleteImage(image, imageId) {
+    this.dialogService.open(DeleteConfirmationComponent, {context: {
+        post: image
+      }}).onClose.subscribe(state => {
+        if (state) {
+          this.deletingImage = true;
+          this.generalService.delete(environment.models.photo, imageId).subscribe(data => {
+            this.loadImages.emit();
+            this.toastr.success('', data.code.message)
+            this.deletingImage = false;
+          })
+        }
     })
+
   }
 
   deleteGroup(group) {
-    this.deletingImage = true;
-    this.photosService.deleteGroup(group).subscribe(data => {
-      if(data.result) {
-        this.toastr.success('', data.code.message);
-        this.loadImages.emit();
+    this.dialogService.open(DeleteConfirmationComponent).onClose.subscribe(state => {
+      if(state) {
+        this.deletingGroup = true;
+        this.photosService.deleteGroup(group).subscribe(data => {
+          if (data.result) {
+            this.toastr.success('', data.code.message);
+            this.loadImages.emit();
+          }
+          this.deletingGroup = false;
+        })
       }
-      this.deletingImage = false;
     })
   }
 
@@ -94,7 +106,15 @@ export class ImageCardComponent implements OnInit {
     this.dialogService.open(UpdateImageComponent, {context: {
         image: this.image,
         imageTypes: this.imageTypes
-      }})
+      }}).onClose.subscribe(updatedImage => {
+        if(updatedImage) {
+          this.photosService.edit(updatedImage).subscribe(response => {
+            this.toastr.success('', 'Obrázek byl upraven.')
+          }, err => {
+            this.toastr.danger(err.stringify(), 'Chyba');
+          })
+        }
+    })
   }
 
 

@@ -5,7 +5,7 @@
   <nb-card-body>
     <form #updateForm="ngForm">
       <div class="form-group">
-        <label class="label" for="edit-title">Název:</label>
+        <label class="label" for="edit-title">Název (mezera se automaticky změní na _):</label>
         <input nbInput
                fullWidth
                ngModel
@@ -18,14 +18,15 @@
       </div>
       <div class="form-group">
         <label class="label" for="edit-description">Popis obrázku:</label>
-        <input nbInput
-               fullWidth
-               ngModel
-               name="edit-description"
-               id="edit-description"
-               placeholder="Popis obrázku"
-               [(ngModel)] = "newImage.description"
-               autocomplete="off">
+<!--        <input nbInput-->
+<!--               fullWidth-->
+<!--               ngModel-->
+<!--               name="edit-description"-->
+<!--               id="edit-description"-->
+<!--               placeholder="Popis obrázku"-->
+<!--               [(ngModel)] = "newImage.description"-->
+<!--               autocomplete="off">-->
+        <textarea rows="6" name="edit-description" id="edit-description" [(ngModel)]="newImage.description" nbInput fullWidth></textarea>
       </div>
 <!--      <div class="form-group">-->
 <!--        <label class="label">Typ obrázku:-->
@@ -40,13 +41,11 @@
     </form>
   </nb-card-body>
   <nb-card-footer>
-    <div class="d-flex justify-content-around">
-      <button class="uploadButton" nbButton (click)="edit()" [disabled]="!updateForm.valid" fullWidth>
+      <button class="uploadButton" fullWidth nbButton (click)="edit()" [disabled]="!updateForm.valid" fullWidth>
         Upravit
       </button>
-      <button (click)="dialogRef.close()" nbButton status="danger" [disabled]="!updateForm.valid" fullWidth>
+      <button (click)="dialogRef.close()" fullWidth nbButton status="danger" [disabled]="!updateForm.valid" fullWidth>
         Zavřít
       </button>
-    </div>
   </nb-card-footer>
 </nb-card>

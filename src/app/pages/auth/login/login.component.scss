@@ -9,6 +9,19 @@
   justify-content: space-between;
 }
 
+@media (max-width: 575px) {
+  .buttons {
+    display: block;
+  }
+
+  .login-button {
+    width: 100%;
+    padding: 1.4em !important;
+    font-size: 1.3em !important;
+    margin-bottom: 2em;
+  }
+}
+
 ::ng-deep .back-link {
   display: none !important;
 }

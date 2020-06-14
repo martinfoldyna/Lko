@@ -55,14 +55,18 @@ export class LoginComponent implements OnInit {
     sessionStorage.setItem('loggedInBy', loggedInBy);
   }
     googleLogin() {
-      this.authService.googleLogin().then(user => {
-        console.log(user);
-        this.toaster.success(user.code.message, 'Vítejte');
-        this.storeUser(user.user, 'social', 'google');
-        this.router.navigateByUrl('/pages/dashboard');
-        this.user = user;
+      this.socialAuth.signIn(GoogleLoginProvider.PROVIDER_ID).then(googleUser => {
+        this.authService.googleLogin(googleUser).subscribe(user => {
+          console.log(user);
+          this.toaster.success(user.code.message, 'Vítejte');
+          this.storeUser(user.user, 'social', 'google');
+          this.router.navigateByUrl('/pages/dashboard');
+          this.user = user;
+        }, err => {
+          // this.toastr.warning(err.error.code.message, 'Upozornění!');
+          this.toastr.warning(err.error.code.message ? err.error.code.message : 'Během přihlášení došlo k chybě. Zkuste se přihlásit znovu.', 'Upozornění!');
+        })
       }).catch(err => {
-        // this.toastr.warning(err.error.code.message, 'Upozornění!');
         this.toastr.warning('Během přihlášení došlo k chybě. Zkuste se přihlásit znovu.', 'Upozornění!');
       })
     }

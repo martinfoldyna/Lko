@@ -4,19 +4,19 @@ import {Code} from "./code";
 
 
 export interface Image {
-  _id: string;
-  filename: string;
+  _id?: string;
+  filename?: string;
   doc_id?: string;
-  base64: string;
-  filesize: number;
+  base64?: string;
+  filesize?: number;
   description?: string;
-  orientation: number;
-  group: string;
-  type: string;
-  image: string;
-  thumbImage: string;
-  createdBy: User;
-  createdAt: Date;
+  orientation?: number;
+  group?: string;
+  type?: string;
+  image?: string;
+  thumbImage?: string;
+  createdBy?: User;
+  createdAt?: Date;
 }
 
 export interface GroupedImage {

@@ -6,6 +6,7 @@ import {AuthoriseUser} from "../../@core/data/users";
 import {Observable} from "rxjs";
 import {AuthorisedUserResponse, GoogleUserResponse, MicrosoftUserResponse} from "../../@core/data/auth";
 import {Config} from "../../../conf";
+import {Router} from "@angular/router";
 
 
 @Injectable({
@@ -17,6 +18,7 @@ LocalAuthService {
   constructor(
     private http: HttpClient,
     private socialAuth: AuthService,
+    private router: Router
   ) { }
 
   load() {
@@ -41,7 +43,7 @@ LocalAuthService {
     if (sessionStorage.getItem('user') && sessionStorage.getItem('auth_token')) {
       sessionStorage.clear();
       localStorage.clear();
-      window.location.reload();
+      this.router.navigate(['/auth'])
     }
 
     if(sessionStorage.getItem('loggedInBy') === 'social') {
@@ -77,19 +79,8 @@ LocalAuthService {
     })
   }
 
-  googleLogin() {
-    return new Promise<GoogleUserResponse>((resolve, reject) => {
-      this.socialAuth.signIn(GoogleLoginProvider.PROVIDER_ID).then(googleUser => {
-          this.http.post<GoogleUserResponse>(`${Config.apiUrl}auth/google/login`, googleUser).subscribe(response => {
-            resolve(response)
-            if(!response){
-              reject(new Error('Google user not received!'))
-            }
-          }, err => {
-            reject(err);
-          });
-      });
-    })
+  googleLogin(googleUser) {
+        return this.http.post<GoogleUserResponse>(`${Config.apiUrl}auth/google/login`, googleUser)
   }
 
   microsoftLogin(token: string): Observable<AuthorisedUserResponse> {

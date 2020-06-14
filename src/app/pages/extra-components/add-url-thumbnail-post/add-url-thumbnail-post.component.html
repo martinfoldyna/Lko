@@ -2,7 +2,7 @@
   <div class="col-md-12">
     <form #form="ngForm">
       <div class="form-group">
-        <label class="label" for="input-title">Nadpis:</label>
+        <label class="label" for="input-title">Nadpis</label>
         <input nbInput
                fullWidth
                name="title"
@@ -27,24 +27,27 @@
                placeholder="URL adresa">
       </div>
       <div class="form-group" >
-        <label for="input-thumbnail" class="label">Náhledový obrázek videa</label><br>
+        <label for="input-thumbnail" class="label">Náhledový obrázek videa</label>
         <input type="file"
                nbInput
                id="input-thumbnail"
                name="files"
                accept="image/*"
                required
+               class="d-block"
+               #fileInput
                (change)="fileSelected($event)">
       </div>
       <div class="form-group">
-        <nb-select placeholder="Vyberte ročník" [(selected)]="classYear">
+        <label class="label">Ročník</label>
+        <nb-select placeholder="Vyberte ročník" [(selected)]="classYear" class="d-block">
           <nb-option value="0">1. ročník</nb-option>
           <nb-option value="1">2. ročník</nb-option>
           <nb-option value="2">3. ročník</nb-option>
           <nb-option value="3">4. ročník</nb-option>
         </nb-select>
       </div>
-      <button class="uploadButton" nbButton fullWidth status="success" [disabled]="disabledSubmit() || !form.valid" (click)="upload()" [nbSpinner]="compressingImages">
+      <button class="uploadButton" nbButton fullWidth status="success" [disabled]="disabledSubmit() || !form.valid" (click)="upload(); form.reset(); classYear = ''; fileInput.value = ''" [nbSpinner]="compressingImages">
         Nahrát
       </button>
     </form>

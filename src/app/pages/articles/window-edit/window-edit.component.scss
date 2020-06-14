@@ -1,22 +1,8 @@
-@import '../../../@theme/styles/themes';
 
-//@include nb-install-component() {
-//  ::ng-deep .form {
-//    display: flex;
-//    flex-direction: column;
-//
-//    .text-label {
-//      margin-top: 1.5rem;
-//    }
-//  }
-//}
 
-nb-card-footer button {
-  margin: 0 20px;
+.edit-dialog-card .uploadButton {
+  margin-bottom: 1em;
 }
 
-img {
-  max-width: 100%;
-}
 
 

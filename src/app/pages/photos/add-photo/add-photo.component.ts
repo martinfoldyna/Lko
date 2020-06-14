@@ -3,7 +3,8 @@ import {CompressedPhoto, NewPhotoSet} from "../../../@core/data/photo";
 import {NgxImageCompressService} from "ngx-image-compress";
 import {PhotosService} from "../photos.service";
 import {Image} from "../../../@core/data/image";
-import {NbToastrService, NbPopoverDirective} from "@nebular/theme"
+import {NbToastrService, NbPopoverDirective, NbDialogService} from "@nebular/theme"
+import {UpdateImageComponent} from "../update-image/update-image.component";
 
 @Component({
   selector: 'ngx-add-photo',
@@ -35,7 +36,8 @@ export class AddPhotoComponent implements OnInit {
   constructor(
     private imageCompress: NgxImageCompressService,
     private photosService: PhotosService,
-    private toastr: NbToastrService
+    private toastr: NbToastrService,
+    private dialogService: NbDialogService
   ) {
     this.photoDescription = ""
     this.thumbnailFiles = new Array<CompressedPhoto>();
@@ -115,13 +117,12 @@ export class AddPhotoComponent implements OnInit {
     }
 
     this.photosService.upload(formData, headers).subscribe(data => {
-      console.log(data);
       this.loadImages.emit();
       this.thumbnailFiles = new Array<CompressedPhoto>();
       this.classYear = undefined;
       form.reset();
     }, err => {
-      console.log(err);
+      this.toastr.danger(err.stringify(), 'Chyba')
     })
   }
 
@@ -135,8 +136,6 @@ export class AddPhotoComponent implements OnInit {
 
   disableSubmit() {
     return !!((this.subject === "STR" && !this.photoDescription) || this.thumbnailFiles.length === 0);
-
-
   }
 
 }

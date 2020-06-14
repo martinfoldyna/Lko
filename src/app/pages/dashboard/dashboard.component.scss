@@ -1,16 +1,22 @@
-nb-icon {
+.category-link nb-icon {
   font-size: 1.5rem;
 }
 
-a {
+.category-link a {
   text-decoration: none;
 }
 
-nb-card {
+.category-link nb-card {
   transition: all .5s;
 }
 
-nb-card:hover {
+.category-link nb-card:hover {
   box-shadow: 0 14px 25px rgba(0,0,0,.16);
   transform: scale(1.01, 1.01);
+}
+
+@media screen and (max-width: 575px){
+  .category-link {
+    width: 100% !important;
+  }
 }

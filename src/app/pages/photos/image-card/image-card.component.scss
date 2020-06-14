@@ -1,11 +1,13 @@
-img {
-  max-width: 100%;
+.image-card img {
+  width: 100%;
+  height: 35vh;
+  object-fit: cover;
   transform: scale(1.1, 1.1);
   cursor: pointer;
   transition: all .5s;
 }
 
-img:hover {
+.image-card img:hover {
   transform: scale(1, 1);
 }
 
@@ -54,6 +56,12 @@ nb-card-body {
   cursor: pointer;
 }
 
-.header-icons nb-icon {
+.header-icon {
   cursor: pointer;
+  font-size: 1.5rem;
 }
+
+.header-icon:last-of-type {
+  margin-left: 1em;
+}
+

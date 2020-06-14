@@ -1,9 +1,9 @@
-<nb-card>
+<nb-card class="lightbox">
   <nb-card-header>
     {{image.filename}}
     <nb-icon pack="eva" icon="close-outline" status="danger" (click)="close()" id="close-icon"></nb-icon>
   </nb-card-header>
-  <nb-card-body [ngStyle]="{background: 'data:image/jpg;base64,' + image.base64}">
+  <nb-card-body>
     <div class="image-container">
       <img src="data:image/jpg;base64,{{image.base64}}" alt="" *ngIf="!fromSlider">
       <img src="{{image.image}}" alt="" *ngIf="fromSlider">

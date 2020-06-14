@@ -9,4 +9,5 @@ export interface CompressedPhoto {
   blob?: Blob;
   fileName?: string;
   orientation?: number;
+  description?: string;
 }

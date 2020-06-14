@@ -1,4 +1,4 @@
-<nb-card class="dialog-card">
+<nb-card class="edit-dialog-card">
     <nb-card-header>
       Upravit příspěvek: {{article.title}}
     </nb-card-header>
@@ -33,13 +33,11 @@
 
     </nb-card-body>
     <nb-card-footer>
-      <div class="d-flex justify-content-around">
         <button class="uploadButton" nbButton (click)="edit()" [disabled]="!updateForm.valid || !articleWasUpdated" [nbSpinner]="fetchingData" fullWidth>
           Upravit
         </button>
         <button (click)="dialogRef.close()" nbButton status="danger" [disabled]="!updateForm.valid" fullWidth>
           Zavřít
         </button>
-      </div>
     </nb-card-footer>
 </nb-card>

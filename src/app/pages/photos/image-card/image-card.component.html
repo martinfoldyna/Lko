@@ -1,9 +1,13 @@
- <nb-card [nbSpinner]="deletingImage || loadingImages" class="image-card" *ngIf="!groupedImage">
+ <nb-card [nbSpinner]="deletingImage || loadingImages" class="image-card oveflow-hidden" *ngIf="!groupedImage">
       <nb-card-header class="image-header">
-        {{image.filename}}
+          {{image.filename}}
         <div class="header-icons">
-          <nb-icon icon="edit-outline" status="warning" class="header-icon" (click)="updateImage(image._id)"></nb-icon>
-          <nb-icon icon="trash-2-outline" pack="eva" status="danger" class="header-icon " (click)="deleteImage(image._id)" style="cursor: pointer"></nb-icon>
+<!--          <button nbButton ghost status="warning" size="small">-->
+            <nb-icon icon="edit-outline" status="warning" class="header-icon" (click)="updateImage(image._id)"></nb-icon>
+<!--          </button>-->
+<!--          <button nbButton ghost status="danger">-->
+            <nb-icon icon="trash-2-outline" pack="eva" status="danger" class="header-icon " (click)="deleteImage(image, image._id)" style="cursor: pointer"></nb-icon>
+<!--          </button>-->
         </div>
       </nb-card-header>
 
@@ -18,7 +22,7 @@
         <p class="label">Vytvořeno: {{image.createdBy.name}} - {{image.createdAt | amLocal | amDateFormat: "DD.MM.YYYY v HH:MM"}} </p>
       </nb-card-footer>
     </nb-card>
-  <nb-card *ngIf="groupedImage">
+  <nb-card *ngIf="groupedImage" [nbSpinner]="deletingGroup" nbSpinnerStatus="primary">
     <nb-card-header class="image-header">
       {{groupKey}}
       <div class="header-icons">

@@ -1,4 +1,4 @@
-  <div class="w-75 m-auto m-2 d-block h-25">
+  <div class="w-75 m-auto m-2 d-block h-25 category-link">
     <a routerLink="/pages/subjects/web">
       <nb-card>
         <nb-card-body>
@@ -13,7 +13,7 @@
       </nb-card>
     </a>
   </div>
-  <div class="w-75 m-auto m-2 d-block h-25">
+  <div class="w-75 m-auto m-2 d-block h-25 category-link">
     <a routerLink="/pages/subjects/mme">
       <nb-card>
         <nb-card-body>
@@ -28,7 +28,7 @@
       </nb-card>
     </a>
   </div>
-  <div class="w-75 m-auto m-2 d-block h-25">
+  <div class="w-75 m-auto m-2 d-block h-25 category-link">
     <a routerLink="/pages/subjects/drawings">
       <nb-card>
         <nb-card-body>
@@ -43,7 +43,7 @@
       </nb-card>
     </a>
   </div>
-  <div class="w-75 m-auto m-2 d-block h-25" *ngIf="userService.getUser().role === 'admin'">
+  <div class="w-75 m-auto m-2 d-block h-25 category-link" *ngIf="userService.getUser().role === 'admin'">
     <a routerLink="/pages/users/">
       <nb-card>
         <nb-card-body>

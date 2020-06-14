@@ -1,4 +1,4 @@
-    <nb-card *ngIf="post">
+    <nb-card *ngIf="post" class="url-card" [nbSpinner]="deletingArticle" nbSpinnerStatus="primary" >
       <nb-card-header (mouseenter)="showOverlay = !showOverlay" (mouseleave)="showOverlay = !showOverlay">
 
         <a [href]=post.url target="_blank"><img src="data:image/jpg;base64,{{post.thumbnail}}" alt="" [style.transform]="photosService.rotateImage(post.thumbnail.orientation)">

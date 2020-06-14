@@ -26,30 +26,13 @@ export class UpdateImageComponent implements OnInit {
     this.newImage = this.image;
   }
 
-  // onKeyUp() {
-  //   this.imageWasUpdated = (this.newImage.filename === this.image.filename || this.newImage.description === this.image.description);
-  // }
-
 
   edit() {
     this.image.filename = this.newImage.filename.replace(/ /g,'_');
     this.image.description = this.newImage.description;
     this.image.type = this.newImage.type;
 
-    this.photosService.edit(this.image).subscribe(response => {
-      console.log(response);
-    }, err => {
-      this.toastr.danger(err.stringify(), 'Chyba');
-    })
-  }
-
-  whiteSpaceToUnderscore(string: string) {
-    return string.replace(/ /g,'_');
-  }
-
-  log(string) {
-    console.log(string);
-    console.log('type:', this.newImage.type);
+    this.dialogRef.close(this.image);
   }
 
 }

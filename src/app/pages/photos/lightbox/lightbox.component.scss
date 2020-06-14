@@ -1,18 +1,18 @@
-nb-card {
+nb-card.lightbox {
   max-width: 80vw;
   position: relative;
 }
 
-nb-card-header {
+.lightbox nb-card-header {
   max-width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-nb-card-body {
+.lightbox nb-card-body {
   padding: 0;
-  height: 87vh;
+  height: 80vh;
 }
 
 .clear {
@@ -24,7 +24,7 @@ nb-card-body {
   height: 100%;
 }
 
-img {
+.lightbox img {
   height: 100%;
   width: 100%;
   object-fit: contain;
